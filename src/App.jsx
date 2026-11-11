@@ -8,6 +8,7 @@ import ProtectedRoute from "./features/admin/auth/ProtectedRoute";
 import AdminDashboardPage from "./features/admin/pages/AdminDashboardPage";
 import AdminLoginPage from "./features/admin/pages/AdminLoginPage";
 import ArticleEditorPage from "./features/admin/pages/ArticleEditorPage";
+import { API_BASE_URL } from "./config/api";
 
 const CATEGORIES = [
   { id: "all", label: "All", color: "#1A2A3D" },
@@ -19,7 +20,7 @@ const CATEGORIES = [
 const AUTHORS = {
   daniel: {
     name: "Daniel Allen",
-    role: "Editor, The Ledger Post",
+    role: "Editor, bydanielallen",
     bio: "Daniel writes about capital flows, market structure, and regulation at the edge of software and finance.",
     avatar: "DO",
   },
@@ -329,8 +330,6 @@ function readPublishedAdminArticles() {
   }
 }
 
-const PUBLIC_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
-
 function normalizeApiPost(post) {
   const content = post.body || "";
   return normalizeAdminArticle({
@@ -346,9 +345,9 @@ function normalizeApiPost(post) {
 }
 
 async function fetchPublishedApiArticles() {
-  if (!PUBLIC_API_BASE_URL) return [];
+  if (!API_BASE_URL) return [];
 
-  const response = await fetch(`${PUBLIC_API_BASE_URL}/posts`);
+  const response = await fetch(`${API_BASE_URL}/posts`);
   if (!response.ok) return [];
 
   const body = await response.json();
@@ -485,7 +484,7 @@ function Header({ articles }) {
   return (
     <header className="top">
       <div className="wrap top-row">
-        <Link className="brand" to="/">The Ledger Post</Link>
+        <Link className="brand" to="/">bydanielallen</Link>
         <nav className="top-links" aria-label="Primary">
           <NavLink className={({ isActive }) => `top-link ${isActive ? "active" : ""}`} to="/">
             Home
@@ -521,7 +520,7 @@ function HomePage({ articles }) {
   const remaining = filtered.filter((item) => item.id !== featured?.id);
 
   useSeo({
-    title: "The Ledger Post | Markets, policy, and fintech analysis",
+    title: "bydanielallen | Markets, policy, and fintech analysis",
     description: "Modern reporting on fintech, economics, and policy with source-backed analysis.",
     url: window.location.href,
   });
@@ -598,13 +597,13 @@ function ArticlePage({ articles }) {
   useSeo(
     article
       ? {
-          title: `${article.title} | The Ledger Post`,
+          title: `${article.title} | bydanielallen`,
           description: article.excerpt,
           type: "article",
           url: `${window.location.origin}/articles/${article.slug}`,
         }
       : {
-          title: "Story not found | The Ledger Post",
+          title: "Story not found | bydanielallen",
           description: "The article you are looking for does not exist.",
           url: window.location.href,
         }
@@ -717,7 +716,7 @@ function ArticlePage({ articles }) {
 
 function NotFoundPage() {
   useSeo({
-    title: "Story not found | The Ledger Post",
+    title: "Story not found | bydanielallen",
     description: "The article you are looking for does not exist.",
     url: window.location.href,
   });
@@ -771,7 +770,7 @@ function AppShell() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <footer className="footer">
-        <div className="wrap">The Ledger Post. Independent reporting on markets, policy, and fintech.</div>
+        <div className="wrap">bydanielallen. Independent reporting on markets, policy, and fintech.</div>
       </footer>
     </div>
   );

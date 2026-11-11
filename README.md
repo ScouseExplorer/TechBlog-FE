@@ -33,17 +33,26 @@ If no backend API is configured, the app uses local storage for demo admin data.
 - Email: `admin@ledgerpost.com`
 - Password: `AdminPass!2026`
 
-### Backend integration and secrets
+### Backend integration
 
-Configure your backend base URL through an environment variable:
+The public article feed and admin API share one base URL configured through
+`VITE_API_BASE_URL`. For local development, copy `.env.example` to `.env` and
+set the URL to the port used by your local Express backend:
 
 ```bash
-VITE_API_BASE_URL=https://your-api.example.com
+VITE_API_BASE_URL=http://localhost:3000
 ```
 
-Important security notes:
+If your backend uses a different port, update the value in `.env`. The `.env`
+file is ignored by Git; `.env.example` is safe to commit and contains only the
+local development default.
 
-- Never place private keys, database passwords, or server secrets in `VITE_` variables.
-- `VITE_` variables are bundled into client code and are public.
-- Keep real secrets server-side and expose only protected API endpoints.
-- Enforce server-side authorization and rate limiting even though the frontend includes guards.
+For Vercel, add `VITE_API_BASE_URL` under **Project Settings > Environment
+Variables**. Once the production API is available at the planned domain, use
+`https://api.techblog.com` for the Production environment, then redeploy so
+Vite includes the value in the build. Set a different value for Preview only
+if you have a separate preview API.
+
+`VITE_` variables are included in browser code and are public. Never put
+private keys, database passwords, or other server secrets in them; keep those
+on the backend.
