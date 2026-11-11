@@ -58,19 +58,43 @@ async function apiRequest(path, options) {
 
   if (!response.ok) {
     const body = await response.json().catch(() => ({}));
-    throw new Error(body.message || "Request failed.");
+    throw new Error(body.error?.message || body.message || "Request failed.");
   }
+
+  if (response.status === 204) return null;
 
   return response.json();
 }
 
+// Backend wraps payloads (e.g. { data: [...] }); unwrap to the raw value.
+function unwrap(body) {
+  if (body && typeof body === "object" && !Array.isArray(body) && "data" in body) {
+    return fromApiArticle(body.data);
+  }
+  return fromApiArticle(body);
+}
+
+function unwrapList(body) {
+  const value = unwrap(body);
+  const list = Array.isArray(value) ? value : value?.articles || value?.items || [];
+  return list.map(fromApiArticle);
+}
+
 export async function loginAdmin({ email, password }) {
   if (API_BASE_URL) {
-    return apiRequest("/admin/login", {
+    const data = await apiRequest("/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
+    const payload = data.data || data;
+    const token = payload.accessToken || payload.token;
+    if (!token) {
+      throw new Error("Login response did not include a token.");
+    }
+
+    return { token, role: "admin", email: payload.user?.email || email };
   }
 
   if (email !== "admin@ledgerpost.com" || password !== "AdminPass!2026") {
@@ -88,10 +112,11 @@ export async function listAdminArticles(session) {
   ensureAuthorized(session);
 
   if (API_BASE_URL) {
-    return apiRequest("/admin/articles", {
+    const body = await apiRequest("/admin/articles", {
       method: "GET",
       headers: makeAuthHeaders(session.token),
     });
+    return unwrapList(body);
   }
 
   return readLocalArticles().sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
@@ -101,10 +126,12 @@ export async function getAdminArticleById(session, id) {
   ensureAuthorized(session);
 
   if (API_BASE_URL) {
-    return apiRequest(`/admin/articles/${id}`, {
-      method: "GET",
-      headers: makeAuthHeaders(session.token),
-    });
+    return unwrap(
+      await apiRequest(`/admin/articles/${id}`, {
+        method: "GET",
+        headers: makeAuthHeaders(session.token),
+      })
+    );
   }
 
   const article = readLocalArticles().find((item) => item.id === id);
@@ -115,15 +142,43 @@ export async function getAdminArticleById(session, id) {
   return article;
 }
 
+// Maps the form shape to the backend's { title, slug, body, published }.
+function toApiPayload(values, { withSlug = true } = {}) {
+  const title = values.title.trim();
+  const payload = {
+    title,
+    body: values.content ?? values.body,
+    published: values.status === ARTICLE_STATUS.PUBLISHED,
+  };
+  if (withSlug) payload.slug = values.slug || generateSlug(title);
+  return payload;
+}
+
+function fromApiArticle(article) {
+  if (!article || typeof article !== "object" || Array.isArray(article)) return article;
+  return {
+    ...article,
+    content: article.content ?? article.body ?? "",
+    excerpt: article.excerpt ?? "",
+    tags: article.tags ?? [],
+    status: article.status ?? (article.published ? ARTICLE_STATUS.PUBLISHED : ARTICLE_STATUS.DRAFT),
+    updatedAt: article.updatedAt ?? article.updated_at,
+    createdAt: article.createdAt ?? article.created_at,
+    publishedAt: article.publishedAt ?? article.published_at,
+  };
+}
+
 export async function createAdminArticle(session, values) {
   ensureAuthorized(session);
 
   if (API_BASE_URL) {
-    return apiRequest("/admin/articles", {
-      method: "POST",
-      headers: makeAuthHeaders(session.token),
-      body: JSON.stringify(values),
-    });
+    return unwrap(
+      await apiRequest("/admin/articles", {
+        method: "POST",
+        headers: makeAuthHeaders(session.token),
+        body: JSON.stringify(toApiPayload(values)),
+      })
+    );
   }
 
   const timestamp = nowIso();
@@ -150,11 +205,13 @@ export async function updateAdminArticle(session, id, values) {
   ensureAuthorized(session);
 
   if (API_BASE_URL) {
-    return apiRequest(`/admin/articles/${id}`, {
-      method: "PUT",
-      headers: makeAuthHeaders(session.token),
-      body: JSON.stringify(values),
-    });
+    return unwrap(
+      await apiRequest(`/admin/articles/${id}`, {
+        method: "PATCH",
+        headers: makeAuthHeaders(session.token),
+        body: JSON.stringify(toApiPayload(values, { withSlug: Boolean(values.slug) })),
+      })
+    );
   }
 
   const articles = readLocalArticles();
@@ -190,10 +247,13 @@ export async function publishAdminArticle(session, id) {
   ensureAuthorized(session);
 
   if (API_BASE_URL) {
-    return apiRequest(`/admin/articles/${id}/publish`, {
-      method: "POST",
-      headers: makeAuthHeaders(session.token),
-    });
+    return unwrap(
+      await apiRequest(`/admin/articles/${id}`, {
+        method: "PATCH",
+        headers: makeAuthHeaders(session.token),
+        body: JSON.stringify({ published: true }),
+      })
+    );
   }
 
   const article = await getAdminArticleById(session, id);
@@ -202,4 +262,18 @@ export async function publishAdminArticle(session, id) {
     tagsText: article.tags.join(", "),
     status: ARTICLE_STATUS.PUBLISHED,
   });
+}
+
+export async function deleteAdminArticle(session, id) {
+  ensureAuthorized(session);
+
+  if (API_BASE_URL) {
+    await apiRequest(`/admin/articles/${id}`, {
+      method: "DELETE",
+      headers: makeAuthHeaders(session.token),
+    });
+    return;
+  }
+
+  writeLocalArticles(readLocalArticles().filter((item) => item.id !== id));
 }

@@ -38,7 +38,7 @@ const ARTICLES = [
     publishedAt: "2026-10-16T08:20:00.000Z",
     updatedAt: "2026-10-16T10:05:00.000Z",
     readMinutes: 9,
-    featured: true,
+    featured: false,
     sources: [
       { label: "BIS report on cross-border payments", url: "https://www.bis.org/cpmi/publ/d193.htm" },
       { label: "IMF note on digital money", url: "https://www.imf.org/en/Publications/fintech-notes" },
@@ -144,10 +144,9 @@ Central banks may hold rates higher for longer even if goods disinflation keeps 
 - Idempotent webhook processing.
 - Explicit timeout and retry semantics.
 
-
-tsx
+\`\`\`tsx
 const nextState = transitions[currentState][event] ?? currentState;
-
+\`\`\`
 
 If one rail is down, users should still complete checkout with the fallback path.`
   },
@@ -200,41 +199,40 @@ The policy challenge is not whether controls matter. It is whether implementatio
 
 const css = `
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap");
-:root{--ink:#11131A;--mute:#5B6273;--paper:#FFFFFF;--card:#FFFFFF;--line:#D8DEE8;--accent:#0E7C7B;--accent-2:#C06A1A;--deep:#1A2A3D;--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif}
+:root{--ink:#14171F;--mute:#5D6473;--paper:#FFFFFF;--card:#FFFFFF;--line:#E3E7EE;--accent:#0F5B92;--deep:#1A2A3D;--serif:"Fraunces",Georgia,"Times New Roman",serif;--sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif}
 @media (prefers-color-scheme: dark){:root{--ink:#F7F7F4;--mute:#ADB3C0;--paper:#121821;--card:#1C2432;--line:#313B4C;--accent:#49A7A4;--accent-2:#E4A268;--deep:#0D1522}}
 *{box-sizing:border-box}
-.np{min-height:100svh;font-family:var(--sans);line-height:1.58;color:var(--ink);background:radial-gradient(circle at 12% 0%,color-mix(in srgb,var(--accent) 18%,transparent),transparent 30%),radial-gradient(circle at 88% 6%,color-mix(in srgb,var(--accent-2) 18%,transparent),transparent 35%),var(--paper)}
+.np{min-height:100svh;font-family:var(--sans);line-height:1.58;color:var(--ink);background:var(--paper)}
 .np a{color:inherit;text-decoration:none}
 .np button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .np :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-.top{position:sticky;top:0;z-index:40;border-bottom:1px solid color-mix(in srgb,var(--line) 70%,transparent);backdrop-filter:blur(10px);background:color-mix(in srgb,var(--paper) 83%,transparent)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.top{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:var(--paper)}
 .top-row{height:72px;display:flex;align-items:center;gap:14px}
-.brand{font-family:var(--serif);font-size:1.7rem;font-weight:700;letter-spacing:-.02em;margin-right:auto}
+.brand{font-family:var(--serif);font-size:1.55rem;font-weight:700;letter-spacing:-.01em;margin-right:auto}
 .top-links{display:flex;gap:8px;flex-wrap:wrap}
-.top-link{padding:8px 12px;border-radius:999px;font-size:.9rem;font-weight:600;color:var(--mute)}
-.top-link.active,.top-link:hover{background:color-mix(in srgb,var(--line) 55%,transparent);color:var(--ink)}
+.top-link{padding:8px 2px;font-size:.9rem;font-weight:600;color:var(--mute);border-bottom:2px solid transparent}
+.top-link.active,.top-link:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .main{padding:26px 0 54px}
 .hero{display:grid;gap:18px;align-items:start}
-.hero-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 22px 44px rgba(19,26,39,.08)}
+.hero-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px}
 .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mute);font-weight:700}
 .kicker-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--cat)}
 .hero h1{font-family:var(--serif);font-size:clamp(2rem,5.6vw,3.8rem);line-height:1.04;letter-spacing:-.03em;margin:10px 0 12px;text-wrap:balance;max-width:20ch}
 .hero p{font-family:var(--serif);font-size:clamp(1.02rem,2.3vw,1.35rem);color:var(--mute);margin:0 0 14px;max-width:62ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px 14px;color:var(--mute);font-size:.88rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 12px}
-.filter-chip{height:34px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:.85rem;font-weight:700;color:var(--mute)}
-.filter-chip.active{background:var(--deep);border-color:var(--deep);color:#fff}
+.filter-chip{height:34px;padding:0 13px;border-radius:5px;border:1px solid var(--line);background:var(--card);font-size:.84rem;font-weight:700;color:var(--mute)}
+.filter-chip.active{background:#EFF3F8;border-color:#CDD6E2;color:var(--ink)}
 .search{display:flex;align-items:center;gap:10px;height:48px;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:var(--card);margin-bottom:20px}
 .search input{width:100%;border:0;outline:0;background:transparent;color:var(--ink);font-size:1rem}
 .grid{display:grid;gap:16px}
-.card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
-.card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--cat)}
-.card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(20,26,38,.11);border-color:color-mix(in srgb,var(--cat) 40%,var(--line))}
+.card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:#C9D3E2;box-shadow:0 5px 14px rgba(18,31,47,.06)}
 .card h3{font-family:var(--serif);font-size:1.45rem;line-height:1.2;margin:0;letter-spacing:-.015em}
 .card p{margin:0;color:var(--mute)}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tag{padding:3px 8px;border-radius:999px;background:color-mix(in srgb,var(--cat) 14%,transparent);font-size:.74rem;font-weight:700;color:var(--cat)}
+.tag{padding:2px 7px;border-radius:4px;background:#F3F6FA;font-size:.72rem;font-weight:700;color:#41506A}
 .article{display:grid;gap:26px}
 .article-body{background:var(--card);border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:16px;padding:24px}
 .article-header{padding-bottom:18px;border-bottom:1px solid color-mix(in srgb,var(--line) 76%,transparent)}
@@ -251,18 +249,19 @@ const css = `
 .markdown p{margin:0 0 1.1rem}
 .markdown ul,.markdown ol{padding-left:1.2rem}
 .markdown blockquote{margin:1rem 0;padding:.9rem 1rem;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:0 8px 8px 0}
+.markdown pre{margin:1rem 0;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#F7F9FC;overflow:auto}
 .markdown table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.94rem}
 .markdown th,.markdown td{border:1px solid var(--line);padding:.5rem .65rem;text-align:left}
 .markdown code{padding:.1rem .4rem;background:color-mix(in srgb,var(--line) 45%,transparent);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
 .markdown a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .side-panel{display:grid;gap:14px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px}
 .panel h3{margin:0 0 10px;font-family:var(--serif);font-size:1.3rem}
 .panel ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
 .source-link{display:block;padding:10px;border:1px solid var(--line);border-radius:10px;font-size:.92rem;color:var(--mute)}
 .source-link:hover{border-color:var(--accent);color:var(--ink)}
 .share{display:flex;gap:8px;flex-wrap:wrap}
-.share a{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:999px;background:color-mix(in srgb,var(--line) 45%,transparent);font-size:.84rem;font-weight:700}
+.share a{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:4px;background:#EFF3F8;font-size:.84rem;font-weight:700}
 .not-found{padding:58px 0}
 .not-found h1{font-family:var(--serif);font-size:2.4rem;margin:0 0 10px}
 .footer{margin-top:26px;border-top:1px solid var(--line);padding:26px 0 40px;color:var(--mute);font-size:.9rem}
@@ -330,8 +329,49 @@ function readPublishedAdminArticles() {
   }
 }
 
+const PUBLIC_API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+
+function normalizeApiPost(post) {
+  const content = post.body || "";
+  return normalizeAdminArticle({
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    excerpt: content.replace(/\s+/g, " ").slice(0, 160),
+    tags: [],
+    publishedAt: post.published_at || post.created_at,
+    updatedAt: post.updated_at,
+    content,
+  });
+}
+
+async function fetchPublishedApiArticles() {
+  if (!PUBLIC_API_BASE_URL) return [];
+
+  const response = await fetch(`${PUBLIC_API_BASE_URL}/posts`);
+  if (!response.ok) return [];
+
+  const body = await response.json();
+  return (body.data || [])
+    .filter((post) => post.published && post.slug && post.title && post.body)
+    .map(normalizeApiPost);
+}
+
 function usePublicArticles() {
   const [adminPublished, setAdminPublished] = useState(() => readPublishedAdminArticles());
+  const [apiPublished, setApiPublished] = useState([]);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchPublishedApiArticles()
+      .then((items) => {
+        if (mounted) setApiPublished(items);
+      })
+      .catch(() => {});
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     const sync = () => setAdminPublished(readPublishedAdminArticles());
@@ -346,7 +386,7 @@ function usePublicArticles() {
   return useMemo(() => {
     const mergedBySlug = new Map();
 
-    [...ARTICLES, ...adminPublished].forEach((article) => {
+    [...ARTICLES, ...adminPublished, ...apiPublished].forEach((article) => {
       mergedBySlug.set(article.slug, article);
     });
 
@@ -358,7 +398,7 @@ function usePublicArticles() {
       const bDate = new Date(b.publishedAt || b.updatedAt).getTime();
       return bDate - aDate;
     });
-  }, [adminPublished]);
+  }, [adminPublished, apiPublished]);
 }
 
 function ensureMetaTag(selector, attributes) {
@@ -612,7 +652,7 @@ function ArticlePage({ articles }) {
               remarkPlugins={[remarkGfm]}
               components={{
                 a: ({ href, children }) => (
-                  <a href={href} target="_blank" rel="noreferrer" className="source-link">
+                  <a href={href} target="_blank" rel="noreferrer">
                     {children}
                   </a>
                 ),

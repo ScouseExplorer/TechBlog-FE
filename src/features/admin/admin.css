@@ -141,6 +141,12 @@
   color: #fff;
 }
 
+.admin-btn.danger {
+  background: #b42318;
+  border-color: #b42318;
+  color: #fff;
+}
+
 .admin-btn:disabled {
   opacity: 0.65;
   cursor: not-allowed;

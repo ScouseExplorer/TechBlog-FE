@@ -13,9 +13,11 @@ export default function ArticleForm({
   onChange,
   onSubmit,
   onPublish,
+  onDelete,
   isEdit,
   isSaving,
   isPublishing,
+  isDeleting,
   articleMeta,
 }) {
   const [viewMode, setViewMode] = useState("edit");
@@ -113,6 +115,16 @@ export default function ArticleForm({
         >
           {isPublishing ? "Publishing..." : "Publish"}
         </button>
+        {isEdit ? (
+          <button
+            type="button"
+            className="admin-btn danger"
+            onClick={onDelete}
+            disabled={isDeleting || isSaving || isPublishing}
+          >
+            {isDeleting ? "Deleting..." : "Delete"}
+          </button>
+        ) : null}
       </div>
     </form>
   );

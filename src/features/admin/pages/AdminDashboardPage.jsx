@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../auth/useAuth";
 import { ARTICLE_STATUS } from "../constants";
-import { listAdminArticles, publishAdminArticle } from "../services/adminApi";
+import { deleteAdminArticle, listAdminArticles, publishAdminArticle } from "../services/adminApi";
 
 function formatDate(isoDate) {
   if (!isoDate) return "-";
@@ -57,6 +57,21 @@ export default function AdminDashboardPage() {
       setArticles((prev) => prev.map((item) => (item.id === articleId ? updated : item)));
     } catch (publishError) {
       setError(publishError.message || "Failed to publish article.");
+    } finally {
+      setBusyId("");
+    }
+  };
+
+  const handleDelete = async (article) => {
+    if (!window.confirm(`Delete "${article.title}"? This cannot be undone.`)) return;
+
+    try {
+      setBusyId(article.id);
+      setError("");
+      await deleteAdminArticle(session, article.id);
+      setArticles((prev) => prev.filter((item) => item.id !== article.id));
+    } catch (deleteError) {
+      setError(deleteError.message || "Failed to delete article.");
     } finally {
       setBusyId("");
     }
@@ -133,6 +148,13 @@ export default function AdminDashboardPage() {
                             {busyId === article.id ? "Publishing..." : "Publish"}
                           </button>
                         ) : null}
+                        <button
+                          className="admin-btn danger"
+                          onClick={() => handleDelete(article)}
+                          disabled={busyId === article.id}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </td>
                   </tr>

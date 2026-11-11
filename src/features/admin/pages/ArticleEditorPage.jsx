@@ -5,6 +5,7 @@ import ArticleForm from "../components/ArticleForm";
 import { EMPTY_ARTICLE, ARTICLE_STATUS } from "../constants";
 import {
   createAdminArticle,
+  deleteAdminArticle,
   getAdminArticleById,
   publishAdminArticle,
   updateAdminArticle,
@@ -33,6 +34,7 @@ export default function ArticleEditorPage() {
   const [errors, setErrors] = useState({});
   const [busy, setBusy] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [loadError, setLoadError] = useState("");
   const [meta, setMeta] = useState(null);
 
@@ -120,6 +122,20 @@ export default function ArticleEditorPage() {
     }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm("Delete this article? This cannot be undone.")) return;
+
+    try {
+      setDeleting(true);
+      setLoadError("");
+      await deleteAdminArticle(session, id);
+      navigate("/admin", { replace: true });
+    } catch (error) {
+      setLoadError(error.message || "Unable to delete article.");
+      setDeleting(false);
+    }
+  };
+
   return (
     <main className="wrap main admin-layout">
       <section className="admin-card">
@@ -139,9 +155,11 @@ export default function ArticleEditorPage() {
           onChange={handleChange}
           onSubmit={handleSave}
           onPublish={handlePublish}
+          onDelete={handleDelete}
           isEdit={isEdit}
           isSaving={busy}
           isPublishing={publishing}
+          isDeleting={deleting}
           articleMeta={meta}
         />
       </section>
