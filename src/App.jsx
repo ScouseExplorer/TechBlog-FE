@@ -193,7 +193,7 @@ const css = `
 .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mute);font-weight:700}
 .kicker-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--cat)}
 .hero h1{font-family:var(--sans);font-size:clamp(1.8rem,4.6vw,3.1rem);font-weight:800;line-height:1.08;letter-spacing:0;margin:10px 0 12px;text-wrap:balance;max-width:20ch}
-.hero p{font-family:var(--serif);font-size:clamp(1.02rem,2.3vw,1.35rem);color:var(--mute);margin:0 0 14px;max-width:62ch}
+.hero-card p{font-family:var(--serif);font-size:clamp(1.02rem,2.3vw,1.35rem);color:var(--mute);margin:0 0 14px;max-width:62ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px 14px;color:var(--mute);font-size:.88rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 12px}
 .filter-chip{height:34px;padding:0 13px;border-radius:5px;border:1px solid var(--line);background:var(--card);font-size:.84rem;font-weight:700;color:var(--mute)}
