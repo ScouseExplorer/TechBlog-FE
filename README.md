@@ -47,12 +47,30 @@ If your backend uses a different port, update the value in `.env`. The `.env`
 file is ignored by Git; `.env.example` is safe to commit and contains only the
 local development default.
 
-For Vercel, add `VITE_API_BASE_URL` under **Project Settings > Environment
-Variables**. Once the production API is available at the planned domain, use
-`https://api.techblog.com` for the Production environment, then redeploy so
-Vite includes the value in the build. Set a different value for Preview only
-if you have a separate preview API.
-
 `VITE_` variables are included in browser code and are public. Never put
 private keys, database passwords, or other server secrets in them; keep those
 on the backend.
+
+## Deploy to Vercel
+
+1. **Prepare the backend.** Deploy the API separately over HTTPS and configure its CORS policy to allow your Vercel production domain and any preview domains you plan to use. The frontend appends `/posts`, `/auth/login`, and `/admin/articles` to the configured base URL, so include any API prefix (for example, `/api`) when your backend expects one. Do not include a trailing slash.
+2. **Push the frontend to GitHub.** Commit and push the app files, including `package-lock.json`. Do not commit `.env`; it is ignored by Git.
+3. **Import the repository into Vercel.** Choose **Add New > Project**, connect GitHub, and import this repository. Set **Root Directory** to the repository root, which is the folder containing `package.json`.
+4. **Check the build settings.** Vercel should detect Vite. If it asks, use Framework Preset `Vite`, Build Command `npm run build`, Output Directory `dist`, and Install Command `npm install`.
+5. **Add the production API URL.** In **Settings > Environment Variables**, add `VITE_API_BASE_URL` with the HTTPS base URL for the deployed API. Select **Production** and, if previews need backend access, **Preview**. A URL such as `https://api.example.com/api` is correct only if the backend serves the expected endpoints under `/api`. This variable is embedded in the browser bundle, so it must not contain secrets.
+6. **Deploy and verify.** Trigger a deployment, then check the homepage, an article page, and `/admin/login`. Also open `/admin` and an article URL directly, then refresh each page to verify client-side routes load. Check the browser’s Network panel for API or CORS errors. Redeploy after changing `VITE_API_BASE_URL`, since Vite reads it at build time.
+
+If refreshing a client-side route returns a Vercel 404, add a `vercel.json` at
+the repository root with this rewrite, then redeploy:
+
+```json
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
+```
+
+**Production admin security:** do not deploy with `VITE_API_BASE_URL` unset.
+Without it, the app uses demo login credentials and browser-local storage;
+this is for demonstration only and does not provide production authentication
+or shared article storage. The backend must enforce authorization for every
+admin API request.
