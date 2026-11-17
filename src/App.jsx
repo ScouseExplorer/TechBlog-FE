@@ -12,6 +12,8 @@ import { API_BASE_URL } from "./config/api";
 
 const CATEGORIES = [
   { id: "all", label: "All", color: "#1A2A3D" },
+  { id: "tech", label: "Tech", color: "#2A6F97" },
+  { id: "business", label: "Business", color: "#3B6B4A" },
   { id: "fintech", label: "Fintech", color: "#0E7C7B" },
   { id: "economics", label: "Economics", color: "#A8650B" },
   { id: "policy", label: "Policy", color: "#7A3E8E" },
@@ -29,172 +31,143 @@ const AUTHORS = {
 const ARTICLES = [
   {
     id: 1,
-    slug: "stablecoin-rails-vs-correspondent-banking",
-    title: "Why stablecoin rails are quietly replacing correspondent banking",
+    slug: "nvidia-post-jensen-huang-era",
+    title: "Can a tech giant outgrow its founder? Inside Nvidia’s post-Jensen era",
     excerpt:
-      "Cross-border settlement that once took three days now clears in minutes. The banks that built the old system are the ones buying in.",
-    category: "fintech",
-    tags: ["payments", "stablecoins", "banking"],
+      "Jensen Huang’s sudden exit leaves a visionary void at the center of the AI boom, testing whether Nvidia’s software moat can outlast its founder.",
+    category: "tech",
+    tags: ["nvidia", "ai", "leadership"],
     authorId: "daniel",
-    publishedAt: "2026-10-16T08:20:00.000Z",
-    updatedAt: "2026-10-16T10:05:00.000Z",
-    readMinutes: 9,
-    featured: false,
+    publishedAt: "2026-11-16T09:00:00.000Z",
+    updatedAt: "2026-11-16T09:00:00.000Z",
+    readMinutes: 5,
+    featured: true,
     sources: [
-      { label: "BIS report on cross-border payments", url: "https://www.bis.org/cpmi/publ/d193.htm" },
-      { label: "IMF note on digital money", url: "https://www.imf.org/en/Publications/fintech-notes" },
+      { label: "NVIDIA Announces CEO Transition", url: "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition" },
+      { label: "Motley Fool analysis on Nvidia's post-Huang risks", url: "https://www.fool.com/investing/2026/11/16/the-resignation-of-jensen-huang-isn-t-nvidia-s-only-problem-where-the-stock-could-fall-to-by-the-end-of-2027/" },
     ],
-    content: `## The shift is not loud, but it is real
+    content: `## An abrupt end to a three-decade run
 
-Most enterprises do not wake up asking for stablecoins. They ask for faster settlement, lower reconciliation overhead, and fewer failed transfers.
+For more than thirty years, Nvidia and Jensen Huang were practically synonymous. That era ended on November 12, 2026, when Huang abruptly resigned as president, CEO, and board member, with longtime CFO Colette Kress stepping in as interim CEO.
 
-Traditional correspondent networks still solve scale and trust. But they carry **layered fees**, delay windows, and country-specific friction.
+The departure triggered immediate volatility on Wall Street and renewed scrutiny in Washington over national security and export controls. Now the market faces a foundational question: **how resilient is Nvidia without its co-founder?**
 
-### What is changing
+### Why Nvidia’s moat still holds
 
-- Treasury teams now compare settlement quality, not just fees.
-- New payment processors expose blockchain rails in the same dashboard as card and bank transfers.
-- Banks are piloting tokenized deposit products to keep enterprise clients from routing around them.
+Switching away from Nvidia is not as simple as buying cheaper silicon from AMD or Intel. Millions of developers rely on its proprietary software stack. Hyperscalers like Microsoft, Meta, and Amazon have already committed billions toward Blackwell and next-generation Rubin infrastructure. Interim CEO Colette Kress has steered Nvidia’s finances since 2013, bringing the steady execution institutional investors want.
 
 ### What to watch next
 
-1. Whether large payroll providers add stablecoin payout options.
-2. Whether regulators harmonize reserve and disclosure rules.
-3. Whether liquidity providers can offer tighter FX spreads during volatile windows.
+1. **The vision gap:** Engineering teams execute roadmaps, but founders make contrarian bets years ahead of the market.
+2. **Washington scrutiny:** Heightened political focus on China exposure could tighten export rules and slow global growth.
+3. **Consumer gaming priorities:** Under finance-led interim leadership, enterprise data centers will likely overshadow GeForce graphics even further.
 
-> The winning rail is rarely ideological. It is whichever option clears money faster and fails less often.`
+> Nvidia is no longer a scrappy startup—it is the infrastructure layer of the AI economy. Its technology will endure, even if its boldest chapter has closed.`
   },
   {
     id: 2,
-    slug: "sticky-services-inflation-central-banks",
-    title: "Sticky services inflation is the number central banks cannot ignore",
-    excerpt: "Goods prices have cooled. Wages and rents have not.",
+    slug: "bank-of-england-rate-hike-home-buyers",
+    title: "The Bank of England just raised rates to 4%: What it means for home buyers",
+    excerpt:
+      "Middle East energy shocks forced the MPC to hike rates for the first time in over three years. Here is how borrowing power and house prices shift next.",
     category: "economics",
-    tags: ["inflation", "interest rates", "macro"],
+    tags: ["interest rates", "mortgages", "housing"],
     authorId: "daniel",
-    publishedAt: "2026-10-15T07:10:00.000Z",
-    updatedAt: "2026-10-15T08:45:00.000Z",
+    publishedAt: "2026-11-16T10:30:00.000Z",
+    updatedAt: "2026-11-16T10:30:00.000Z",
     readMinutes: 6,
+    featured: false,
     sources: [
-      { label: "OECD inflation dashboard", url: "https://www.oecd.org/en/data/indicators/inflation-cpi.html" },
+      { label: "Bank of England November 2026 Monetary Policy Summary", url: "https://www.bankofengland.co.uk/monetary-policy-summary-and-minutes/2026/november-2026" },
+      { label: "The Guardian on BoE Chief Economist Huw Pill's rate outlook", url: "https://www.theguardian.com/business/2026/nov/14/interest-rate-rises-inflation-bank-of-england-chief-economist" },
     ],
-    content: `When services inflation stays elevated, policy makers cannot call the cycle over.
+    content: `## Why the Bank reversed course
 
-### Why services are harder to cool
+On November 5, 2026, the Bank of England’s Monetary Policy Committee voted 8–1 to raise the UK base rate by 0.25 percentage points to **4%**.
 
-Services are labor-heavy. If wage growth remains above productivity growth, businesses eventually pass costs through.
+Ongoing conflict in the Middle East has kept energy prices volatile, pushing inflation back up and prompting warnings that price growth could reach 5% by mid-2027. Chief Economist Huw Pill has already signaled that further hikes could follow in December and early 2027.
 
-- Housing and rents reset slowly.
-- Care and education are less exposed to imports.
-- Labor shortages can persist despite weaker headline growth.
+### How this hits buyers and homeowners
 
-### The practical implication
+Fixed mortgage rates had largely priced in the move already, because lenders base their deals on market swap rates. Higher stress-test rates reduce maximum loan sizes and buyers’ purchasing power compared with early 2026. With many first-time buyers pausing their search, sellers face softer demand and more room for negotiation. Tracker and SVR borrowers see monthly repayments rise straight away, while fixed-rate holders remain insulated until renewal.
 
-Central banks may hold rates higher for longer even if goods disinflation keeps headline CPI moving lower.`
+### Smart moves before the next MPC meeting
+
+1. **Lock in a rate early** if your current fix expires within six months, preserving the option to switch if pricing improves.
+2. **Push toward the next deposit tier** (such as 10% or 40% equity) where lenders concentrate their sharpest rate discounts.
+3. **Compare total cost over headline rates**, factoring in arrangement fees through a whole-of-market broker.
+
+> Higher borrowing costs shrink budgets, but a quieter market hands negotiating leverage back to prepared buyers.`
   },
   {
     id: 3,
-    slug: "open-banking-rules-small-lenders",
-    title: "What the new open banking rules change for small lenders",
-    excerpt: "Data-sharing mandates reach further than the headlines suggest.",
-    category: "policy",
-    tags: ["open banking", "compliance", "lending"],
+    slug: "musk-spacex-xai-tesla-merger-endgame",
+    title: "Elon Musk’s $3.5 trillion endgame: Why SpaceX, xAI, and Tesla are merging",
+    excerpt:
+      "After folding xAI into SpaceX, talks to absorb Tesla would create the largest corporate tie-up in history—combining orbital compute with voting control.",
+    category: "business",
+    tags: ["tesla", "spacex", "mergers"],
     authorId: "daniel",
-    publishedAt: "2026-10-14T08:50:00.000Z",
-    updatedAt: "2026-10-14T09:30:00.000Z",
-    readMinutes: 7,
+    publishedAt: "2026-11-16T12:00:00.000Z",
+    updatedAt: "2026-11-16T12:00:00.000Z",
+    readMinutes: 6,
+    featured: false,
     sources: [
-      { label: "UK FCA policy updates", url: "https://www.fca.org.uk/publications/policy-statements" },
+      { label: "Motley Fool breakdown of the SpaceX-Tesla deal structure", url: "https://www.fool.com/investing/2026/11/13/spacex-could-announce-a-deal-for-tesla-as-soon-as-december-here-s-what-it-would-do-to-spacex-stock/" },
+      { label: "Crypto Briefing on Musk's Tesla-SpaceX merger proposal", url: "https://cryptobriefing.com/musk-proposes-tesla-spacex-merger-to-boost-tech-dominance/" },
     ],
-    content: `The latest rule package expands both **data scope** and **timing obligations**.
+    content: `## Pulling the empire under one roof
 
-### What small lenders need to implement
+Earlier in 2026, SpaceX absorbed xAI before going public in a record-setting IPO. Now, active merger discussions between SpaceX and Tesla point toward a roughly **$3.5 trillion combination** that would dwarf every corporate takeover in history.
 
-| Area | Requirement | Risk if delayed |
-| --- | --- | --- |
-| Consent flows | Clear, revocable consent records | Enforcement and complaints |
-| Data retention | Defined expiry and deletion routines | Privacy breaches |
-| Incident response | Structured reporting windows | Fines and trust loss |
+### Why Musk wants the deal
 
-### Quick operating checklist
+Uniting SpaceX’s orbital infrastructure and Starlink network with Tesla’s Full Self-Driving and Optimus robotics could remove friction around chips and compute. Musk holds dominant voting power at SpaceX, and structuring the transaction as SpaceX absorbing Tesla would give him decisive governance control without relying on performance milestones alone.
 
-1. Map every third-party data dependency.
-2. Version API contracts and monitor deprecations.
-3. Add customer-facing transparency logs.`
+### What it means for shareholders
+
+Tesla investors would trade standalone EV exposure for satellite and AI growth if their shares converted into SpaceX stock, while giving up outside shareholder voting influence. For SpaceX investors, absorbing Tesla would add massive scale but could dilute rapid revenue growth with a slower-growing, capital-intensive automotive business.
+
+### What to look out for next
+
+1. **The exchange ratio:** Independent board committees must agree on a share-swap price that avoids legal challenges over valuation and executive vesting.
+2. **National security reviews:** Merging Tesla’s deep manufacturing footprint in China with SpaceX’s classified U.S. defense contracts will draw intense scrutiny in Washington.
+3. **Upcoming shareholder milestones:** Watch for formal proxy filings and signals around Tesla’s December annual meeting.
+
+> A unified balance sheet solves Musk’s governance and compute bottlenecks, but forces investors to buy the entire empire at once.`
   },
   {
     id: 4,
-    slug: "payment-gateway-card-and-bitcoin",
-    title: "Building a payment gateway on two rails: card and Bitcoin",
-    excerpt: "Lessons from routing one checkout across Stripe and BTCPay.",
-    category: "fintech",
-    tags: ["architecture", "payments", "crypto"],
+    slug: "beyond-chatbots-ai-agents-world-models",
+    title: "Beyond chatbots: 3 tech shifts reshaping how we work and live",
+    excerpt:
+      "Software is moving from passive chat boxes to autonomous agents and physics-aware world models—just as global regulators tighten the rules.",
+    category: "tech",
+    tags: ["ai agents", "world models", "regulation"],
     authorId: "daniel",
-    publishedAt: "2026-10-13T09:25:00.000Z",
-    updatedAt: "2026-10-13T11:15:00.000Z",
-    readMinutes: 8,
-    sources: [
-      { label: "Stripe docs", url: "https://docs.stripe.com" },
-      { label: "BTCPay docs", url: "https://docs.btcpayserver.org" },
-    ],
-    content: `A dual-rail checkout succeeds when failure handling is first-class.
-
-### Non-negotiables
-
-- Shared order state machine across rails.
-- Idempotent webhook processing.
-- Explicit timeout and retry semantics.
-
-\`\`\`tsx
-const nextState = transitions[currentState][event] ?? currentState;
-\`\`\`
-
-If one rail is down, users should still complete checkout with the fallback path.`
-  },
-  {
-    id: 5,
-    slug: "uk-productivity-puzzle-again",
-    title: "The UK productivity puzzle, one more time",
-    excerpt: "Investment, not effort, explains most of the gap.",
-    category: "economics",
-    tags: ["productivity", "investment", "growth"],
-    authorId: "daniel",
-    publishedAt: "2026-10-12T11:40:00.000Z",
-    updatedAt: "2026-10-12T12:30:00.000Z",
+    publishedAt: "2026-11-16T14:00:00.000Z",
+    updatedAt: "2026-11-16T14:00:00.000Z",
     readMinutes: 5,
-    sources: [{ label: "ONS productivity estimates", url: "https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/labourproductivity" }],
-    content: `Productivity debates often over-index on motivation.
+    featured: false,
+    sources: [
+      { label: "Gartner Top Strategic Technology Trends for 2027", url: "https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027" },
+      { label: "Firecrawl Agentic AI Trends Report 2026", url: "https://www.firecrawl.dev/blog/agentic-ai-trends" },
+    ],
+    content: `## From tools you click to systems that act
 
-The bigger variable is **capital deepening**: software, tools, logistics, and management systems.
+For the past few years, interacting with AI meant typing prompts into a chat window. That interface is rapidly giving way to autonomous systems that operate software, simulate physical environments, and face far stricter oversight.
 
-### Two things can be true
+### Three shifts defining the landscape
 
-- Workers are putting in effort.
-- Output per hour still lags peers.
+Multi-agent systems and command-line developer tools can plan workflows, authenticate across apps, and execute multi-step tasks with minimal prompting. Unlike text-based models that predict words, world models learn space, time, and causality, allowing robotics and autonomous vehicles to simulate outcomes before acting. As enterprises deploy agents with real system credentials, dynamic identity controls, audit trails, and stricter safety regulations are becoming essential.
 
-Without sustained investment, this gap does not close by itself.`
-  },
-  {
-    id: 6,
-    slug: "export-controls-and-compute-cost",
-    title: "Export controls and the cost of cutting off compute",
-    excerpt: "How restrictions ripple through suppliers, startups, and allies.",
-    category: "policy",
-    tags: ["trade", "compute", "geopolitics"],
-    authorId: "daniel",
-    publishedAt: "2026-10-10T14:00:00.000Z",
-    updatedAt: "2026-10-10T16:05:00.000Z",
-    readMinutes: 6,
-    sources: [{ label: "WTO trade policy resources", url: "https://www.wto.org/english/res_e/booksp_e/trade_policymaking_e.pdf" }],
-    content: `Controls can slow adversarial capability growth, but they also reshape supply chains.
+### What this means in practice
 
-### Secondary effects to model
+1. **Prompt engineering is fading** in favor of context engineering feeding agents structured, real-time data so they act reliably.
+2. **Specialized models win on cost:** Smaller, domain-tuned models are outperforming giant general-purpose models in healthcare, finance, and legal workflows.
+3. **Trust is the bottleneck:** The companies that win next will not just have better demos, but verifiable safety and permission controls.
 
-- Alternate sourcing and gray-market leakage.
-- Cost inflation for allied buyers.
-- Longer lead times for legitimate enterprise demand.
-
-The policy challenge is not whether controls matter. It is whether implementation keeps strategic intent aligned with market reality.`
+> The novelty phase of AI is over. The next wave is quieter, deeply embedded in workflows, and held to much higher standards.`
   },
 ];
 
@@ -210,7 +183,7 @@ const css = `
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .top{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:var(--paper)}
 .top-row{height:72px;display:flex;align-items:center;gap:14px}
-.brand{font-family:var(--serif);font-size:1.55rem;font-weight:700;letter-spacing:-.01em;margin-right:auto}
+.brand{font-family:var(--sans);font-size:1.55rem;font-weight:800;letter-spacing:0;margin-right:auto}
 .top-links{display:flex;gap:8px;flex-wrap:wrap}
 .top-link{padding:8px 2px;font-size:.9rem;font-weight:600;color:var(--mute);border-bottom:2px solid transparent}
 .top-link.active,.top-link:hover{color:var(--ink);border-bottom-color:var(--ink)}
@@ -219,8 +192,8 @@ const css = `
 .hero-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:22px}
 .kicker{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;color:var(--mute);font-weight:700}
 .kicker-dot{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--cat)}
-.hero h1{font-family:var(--serif);font-size:clamp(2rem,5.6vw,3.8rem);line-height:1.04;letter-spacing:-.03em;margin:10px 0 12px;text-wrap:balance;max-width:20ch}
-.hero p{font-family:var(--serif);font-size:clamp(1.02rem,2.3vw,1.35rem);color:var(--mute);margin:0 0 14px;max-width:62ch}
+.hero h1{font-family:var(--sans);font-size:clamp(1.8rem,4.6vw,3.1rem);font-weight:800;line-height:1.08;letter-spacing:0;margin:10px 0 12px;text-wrap:balance;max-width:20ch}
+.hero-card p{font-family:var(--serif);font-size:clamp(1.02rem,2.3vw,1.35rem);color:var(--mute);margin:0 0 14px;max-width:62ch}
 .meta{display:flex;flex-wrap:wrap;gap:8px 14px;color:var(--mute);font-size:.88rem}
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 12px}
 .filter-chip{height:34px;padding:0 13px;border-radius:5px;border:1px solid var(--line);background:var(--card);font-size:.84rem;font-weight:700;color:var(--mute)}
@@ -230,14 +203,14 @@ const css = `
 .grid{display:grid;gap:16px}
 .card{display:flex;flex-direction:column;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;transition:border-color .2s,box-shadow .2s}
 .card:hover{border-color:#C9D3E2;box-shadow:0 5px 14px rgba(18,31,47,.06)}
-.card h3{font-family:var(--serif);font-size:1.45rem;line-height:1.2;margin:0;letter-spacing:-.015em}
+.card h3{font-family:var(--sans);font-size:1.3rem;font-weight:800;line-height:1.25;margin:0;letter-spacing:0}
 .card p{margin:0;color:var(--mute)}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
 .tag{padding:2px 7px;border-radius:4px;background:#F3F6FA;font-size:.72rem;font-weight:700;color:#41506A}
-.article{display:grid;gap:26px}
-.article-body{background:var(--card);border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:16px;padding:24px}
+.article{display:grid;gap:26px;min-width:0}
+.article-body{min-width:0;background:var(--card);border:1px solid color-mix(in srgb,var(--line) 72%,transparent);border-radius:16px;padding:24px}
 .article-header{padding-bottom:18px;border-bottom:1px solid color-mix(in srgb,var(--line) 76%,transparent)}
-.article-title{font-family:var(--serif);font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.04;letter-spacing:-.03em;margin:10px 0 14px;max-width:22ch}
+.article-title{font-family:var(--sans);font-size:clamp(2.1rem,5vw,3.8rem);font-weight:800;line-height:1.08;letter-spacing:0;margin:10px 0 14px;max-width:22ch}
 .article-dek{font-family:var(--serif);font-size:clamp(1.05rem,2.2vw,1.32rem);line-height:1.55;color:var(--mute);margin:0 0 16px;max-width:60ch}
 .byline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}
 .avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--deep);color:#fff;font-weight:800;font-size:.82rem}
@@ -245,13 +218,14 @@ const css = `
 .byline-text span{display:block;color:var(--mute);font-size:.85rem}
 .dateline{display:flex;flex-wrap:wrap;gap:6px 12px;color:var(--mute);font-size:.84rem}
 .dateline .sep{opacity:.55}
-.markdown{margin-top:26px;font-size:1.05rem;line-height:1.76;max-width:72ch}
+.markdown{min-width:0;margin-top:26px;font-size:1.05rem;line-height:1.76;max-width:72ch;overflow-wrap:anywhere}
 .markdown h2,.markdown h3{font-family:var(--serif);letter-spacing:-.01em;line-height:1.2;margin:1.8rem 0 .8rem}
 .markdown p{margin:0 0 1.1rem}
 .markdown ul,.markdown ol{padding-left:1.2rem}
 .markdown blockquote{margin:1rem 0;padding:.9rem 1rem;border-left:3px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:0 8px 8px 0}
 .markdown pre{margin:1rem 0;padding:14px 16px;border:1px solid var(--line);border-radius:8px;background:#F7F9FC;overflow:auto}
-.markdown table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.94rem}
+.markdown table{display:block;width:100%;max-width:100%;border-collapse:collapse;margin:1rem 0;font-size:.94rem;overflow-x:auto;white-space:nowrap}
+.markdown img{max-width:100%;height:auto}
 .markdown th,.markdown td{border:1px solid var(--line);padding:.5rem .65rem;text-align:left}
 .markdown code{padding:.1rem .4rem;background:color-mix(in srgb,var(--line) 45%,transparent);border-radius:6px;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
 .markdown a{color:var(--accent);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
@@ -277,6 +251,19 @@ const css = `
   .article{grid-template-columns:minmax(0,2fr) minmax(280px,1fr);align-items:start}
   .article-body{padding:30px}
   .side-panel{position:sticky;top:96px}
+}
+@media (max-width: 520px){
+  .top-row{height:auto;min-height:68px;flex-wrap:wrap;gap:0 12px;padding-top:8px;padding-bottom:8px}
+  .brand{font-size:1.35rem}
+  .top-links{width:100%;gap:16px}
+  .top-link{padding:5px 0}
+  .main{padding-top:18px;padding-bottom:36px}
+  .hero-card{padding:18px}
+  .article{gap:18px}
+  .article-body{padding:18px;border-radius:10px}
+  .markdown{font-size:1rem}
+  .filter-chip{height:40px}
+  .share a{height:40px}
 }
 @media (prefers-reduced-motion: reduce){
   .card{transition:none}
@@ -389,14 +376,19 @@ function usePublicArticles() {
       mergedBySlug.set(article.slug, article);
     });
 
-    return Array.from(mergedBySlug.values()).sort((a, b) => {
-      const featuredDiff = Number(Boolean(b.featured)) - Number(Boolean(a.featured));
-      if (featuredDiff !== 0) return featuredDiff;
+    return Array.from(mergedBySlug.values())
+      .filter((article) =>
+        !article.title.toLowerCase().includes("how to get rich") &&
+        !article.slug.toLowerCase().includes("how-to-get-rich")
+      )
+      .sort((a, b) => {
+        const featuredDiff = Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+        if (featuredDiff !== 0) return featuredDiff;
 
-      const aDate = new Date(a.publishedAt || a.updatedAt).getTime();
-      const bDate = new Date(b.publishedAt || b.updatedAt).getTime();
-      return bDate - aDate;
-    });
+        const aDate = new Date(a.publishedAt || a.updatedAt).getTime();
+        const bDate = new Date(b.publishedAt || b.updatedAt).getTime();
+        return bDate - aDate;
+      });
   }, [adminPublished, apiPublished]);
 }
 
@@ -484,7 +476,7 @@ function Header({ articles }) {
   return (
     <header className="top">
       <div className="wrap top-row">
-        <Link className="brand" to="/">bydanielallen</Link>
+        <Link className="brand" to="/">ByDanielAllen</Link>
         <nav className="top-links" aria-label="Primary">
           <NavLink className={({ isActive }) => `top-link ${isActive ? "active" : ""}`} to="/">
             Home
@@ -516,7 +508,10 @@ function HomePage({ articles }) {
     });
   }, [activeCategory, articles, query]);
 
-  const featured = filtered.find((item) => item.featured) ?? filtered[0];
+  const featured =
+    filtered.find((item) => item.featured) ??
+    filtered.find((item) => item.slug === "stablecoin-rails-vs-correspondent-banking") ??
+    filtered[0];
   const remaining = filtered.filter((item) => item.id !== featured?.id);
 
   useSeo({

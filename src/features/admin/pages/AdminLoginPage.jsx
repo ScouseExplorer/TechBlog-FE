@@ -75,7 +75,6 @@ export default function AdminLoginPage() {
               autoComplete="email"
               value={value.email}
               onChange={(event) => setValue((prev) => ({ ...prev, email: event.target.value }))}
-              placeholder="admin@ledgerpost.com"
             />
             {errors.email ? <small className="admin-error">{errors.email}</small> : null}
           </label>
@@ -100,7 +99,6 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="admin-footnote">
-          In demo mode, use <strong>admin@ledgerpost.com</strong> and <strong>AdminPass!2026</strong>.
           <br />
           <Link to="/">Return to public site</Link>
         </p>
